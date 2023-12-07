@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { addProduct, removeProduct, selectCart } from './cartSlice'
+import { addProduct } from './cartSlice'
 import { selectproducts, purchaseCart, selectstatus, getDataAsync } from './superSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import Cart from './Cart';
@@ -14,7 +14,7 @@ const Super = () => {
     }, [dispatch])
 
     useEffect(() => {
-        if (status) {
+        if (status === "Done") {
             const productsList = superproducts.products.map((prod, index) => (
                 <div key={index} className="card mb-3" style={{maxWidth:540}}>
                     <div className="row g-0">
@@ -39,6 +39,7 @@ const Super = () => {
         }
     }, [status, superproducts.products, dispatch]);
     return (
+    
         <div className="container">
             <div className="row">
                 <div className="col-md-8">

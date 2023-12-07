@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { logtoServer } from './loginAPI';
-
+import { Message } from '../../Message';
 const initialState = {
   loggedin:false,
   token:null,
@@ -37,6 +37,7 @@ export const loginSlice = createSlice({
       state.loggedin = false
       state.userDetails = []
       sessionStorage.removeItem("userDetails")
+      Message("Logged out Successfully","success")
     }
   },
   extraReducers: (builder) => {
@@ -58,6 +59,7 @@ export const loginSlice = createSlice({
           "is_staff": state.userDetails.is_staff
         }));
         state.loggedin = true
+        Message("Welcome Back "+state.userDetails.username,"success")
       })
   },
 });

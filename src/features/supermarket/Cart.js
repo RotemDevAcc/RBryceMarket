@@ -25,7 +25,7 @@ const Cart = () => {
                 <div className="card-header">
                     {}
                 </div>
-                <button className="btn btn-primary" onClick={()=>dispatch(purchaseCart({}))}>
+                <button className="btn btn-primary" onClick={()=>dispatch(purchaseCart({}))} style={{margin:5}}>
                     Checkout
                 </button>
                 <button className="btn btn-danger" onClick={()=>dispatch(clearCart())}>

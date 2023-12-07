@@ -1,6 +1,8 @@
 import React from 'react';
-import './App.css';
+import './styles.css';
 import { Outlet } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <div className="App">
@@ -19,7 +21,9 @@ function App() {
       <footer className="bg-dark text-white text-center py-3">
         <p>&copy; 2023 Bryce Market. All rights reserved.</p>
       </footer>
+      
       <Outlet />
+      
     </div>
   );
 }

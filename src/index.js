@@ -12,6 +12,8 @@ import Login from './features/supermarket/Login';
 import Super from './features/supermarket/Super';
 import Layout from './Layout';
 import Contact from './Contact';
+import DarkMode from './Darkmode';
+import { ToastContainer } from 'react-toastify';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -20,6 +22,8 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
+        <DarkMode />
+        <ToastContainer />
         <Routes>
         <Route
             path="/*"

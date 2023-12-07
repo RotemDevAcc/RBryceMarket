@@ -1,12 +1,15 @@
 // Layout.js
 import React from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { is_user_logged } from './features/supermarket/loginSlice';
-import { useSelector } from 'react-redux';
+import { is_user_logged, user_logout } from './features/supermarket/loginSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleDarkMode } from './Darkmode';
+
 
 const Layout = () => {
     const logged = useSelector(is_user_logged);
     const location = useLocation();
+    const dispatch = useDispatch();
 
     return (
         <div>
@@ -28,13 +31,22 @@ const Layout = () => {
                                 Contact
                             </NavLink>
                         </li>
-                        {!logged && (
+                        {!logged ? (
                             <li className={`nav-item ${location.pathname === '/login' ? 'active' : ''}`}>
                                 <NavLink to="/login" className="nav-link">
                                     Login
                                 </NavLink>
                             </li>
+                        ) : (
+                            <li className="nav-item">
+                                <span className="nav-link" onClick={() => { dispatch(user_logout()) }} style={{ cursor: "pointer", color: "#007bff" }} >Logout</span>
+                            </li>
                         )}
+                        <li className={`nav-item ${location.pathname === '/logout' ? 'active' : ''}`}>
+                            <button onClick={()=>toggleDarkMode()} className="nav-link" style={{ color: "#007bff", border: 'none', background: 'none', cursor: 'pointer'}}>
+                                Toggle Dark Mode
+                            </button>
+                        </li>
                     </ul>
                 </nav>
             </header>

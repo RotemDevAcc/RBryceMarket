@@ -1,8 +1,8 @@
 import React from 'react'
-
+import './styles.css';
 const Contact = () => {
   return (
-    <div>
+    <div className='Contact'>
     <section className="container mt-4">
         <h2>Contact Information</h2>
         <p>If you have any questions or need assistance, feel free to contact us.</p>
