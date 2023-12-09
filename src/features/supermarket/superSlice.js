@@ -15,6 +15,8 @@ export const getDataAsync = createAsyncThunk(
     }
   );
 
+
+
 export const superSlice = createSlice({
   name: 'super',
   initialState,
@@ -23,16 +25,23 @@ export const superSlice = createSlice({
     purchaseCart:(state,payload)=>{
         const cart = payload.payload.cart
         console.table(cart)
-    }
+    },
+
+
+    
   },
   extraReducers: (builder) => {
     builder
       .addCase(getDataAsync.fulfilled, (state, action) => {
-        state.products =action.payload
-        state.status ='Done'
+        state.products =action.payload.products
+        state.categories = action.payload.categories
+        state.status ='done'
       })
       .addCase(getDataAsync.rejected, (state, action) => {
-        state.status ='Rejected'
+        state.status ='rejected'
+      })
+      .addCase(getDataAsync.pending, (state, action) => {
+        state.status = "loading";
       })
   },
   
@@ -44,6 +53,6 @@ export const { purchaseCart } = superSlice.actions;
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.super.value)`
 export const selectproducts = (state) => state.super.products;
+export const selectcategories = (state) => state.super.categories;
 export const selectstatus = (state) => state.super.status;
-
 export default superSlice.reducer;

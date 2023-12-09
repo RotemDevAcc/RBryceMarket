@@ -1,10 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { logtoServer } from './loginAPI';
 import { Message } from '../../Message';
+
+const getUserDetailsFromSessionStorage = () => {
+  const storedUserDetails = sessionStorage.getItem('userDetails');
+  return storedUserDetails ? JSON.parse(storedUserDetails) : null;
+};
+
 const initialState = {
-  loggedin:false,
-  token:null,
-  userDetails:[]
+  loggedin:getUserDetailsFromSessionStorage() ? true : false,
+  token:sessionStorage.getItem('token') || null,
+  userDetails:getUserDetailsFromSessionStorage() || []
   // userID: null,
   // userName:null,
   // firstname:"John",
@@ -46,7 +52,7 @@ export const loginSlice = createSlice({
         if(!action.payload.access) return
         state.token = action.payload.access;
         state.userDetails = parseJwt(state.token)
-
+        sessionStorage.setItem("token", state.token);
         sessionStorage.setItem("userDetails", JSON.stringify({
           "user_id": state.userDetails.user_id,
           "user": state.userDetails.username,
@@ -80,6 +86,7 @@ export const { user_logout } = loginSlice.actions;
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.login.value)`
 export const is_user_logged = (state) => state.login.loggedin;
+export const is_user_staff = (state) => state.login.userDetails.is_staff;
 export const get_user_details = (state) => state.login.userDetails;
 
 export default loginSlice.reducer;

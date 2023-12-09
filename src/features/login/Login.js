@@ -16,10 +16,7 @@ const Login = () => {
     const details = { userName: userName, password: password };
   
     try {
-      const retvalue = await dispatch(loginAsync(details));
-      console.log(retvalue)
-      // The loginAsync action has completed successfully, 
-      // and the navigation logic is handled inside the loginSlice
+      dispatch(loginAsync(details));
     } catch (error) {
       // Handle any errors
       console.error('Login error:', error);

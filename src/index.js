@@ -8,12 +8,13 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import Login from './features/supermarket/Login';
+import Login from './features/login/Login';
 import Super from './features/supermarket/Super';
+import DarkMode from './features/settings/DarkMode';
 import Layout from './Layout';
 import Contact from './Contact';
-import DarkMode from './Darkmode';
 import { ToastContainer } from 'react-toastify';
+import Profile from './Profile';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -22,8 +23,8 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <DarkMode />
-        <ToastContainer />
+        <ToastContainer position="top-center" theme='dark' />
+        <DarkMode/>
         <Routes>
         <Route
             path="/*"
@@ -33,6 +34,7 @@ root.render(
             <Route path="super" element={<Super />} />
             <Route path="login" element={<Login />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
         </Routes>
       </BrowserRouter>

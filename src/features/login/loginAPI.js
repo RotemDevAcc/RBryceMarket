@@ -1,7 +1,8 @@
 import axios from 'axios';
-
+import { TargetServer } from '../settings/Settings';
 export async function logtoServer(details) {
-    const MY_SERVER = "http://127.0.0.1:8000/login/"; // Updated protocol to 'http' or 'https'
+    const MY_SERVER = `${TargetServer}login/`; // Updated protocol to 'http' or 'https'
+    
     const data = {
         "username": details.userName,
         "password": details.password

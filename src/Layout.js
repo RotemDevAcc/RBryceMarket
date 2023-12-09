@@ -1,13 +1,13 @@
 // Layout.js
 import React from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { is_user_logged, user_logout } from './features/supermarket/loginSlice';
+import { is_user_logged, user_logout, is_user_staff } from './features/login/loginSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleDarkMode } from './Darkmode';
 
 
 const Layout = () => {
     const logged = useSelector(is_user_logged);
+    const isstaff = useSelector(is_user_staff);
     const location = useLocation();
     const dispatch = useDispatch();
 
@@ -38,15 +38,41 @@ const Layout = () => {
                                 </NavLink>
                             </li>
                         ) : (
+                            <>
                             <li className="nav-item">
                                 <span className="nav-link" onClick={() => { dispatch(user_logout()) }} style={{ cursor: "pointer", color: "#007bff" }} >Logout</span>
                             </li>
+                            <li className={`nav-item ${location.pathname === '/profile' ? 'active' : ''}`}>
+                                <NavLink to="/profile" className="nav-link">
+                                    My Profile
+                                </NavLink>
+                            </li>
+                            </>
                         )}
-                        <li className={`nav-item ${location.pathname === '/logout' ? 'active' : ''}`}>
-                            <button onClick={()=>toggleDarkMode()} className="nav-link" style={{ color: "#007bff", border: 'none', background: 'none', cursor: 'pointer'}}>
-                                Toggle Dark Mode
-                            </button>
-                        </li>
+                        {isstaff ? (
+                            <>
+                            <li className={`nav-item ${location.pathname === '/admin' ? 'active' : ''}`}>
+                                <NavLink to="/admin" className="nav-link">
+                                    Admin Home
+                                </NavLink>
+                            </li>
+                            <li className={`nav-item ${location.pathname === '/customers' ? 'active' : ''}`}>
+                                <NavLink to="/customers" className="nav-link">
+                                    Customers
+                                </NavLink>
+                            </li>
+                            <li className={`nav-item ${location.pathname === '/allproducts' ? 'active' : ''}`}>
+                                <NavLink to="/allproducts" className="nav-link">
+                                    All Products
+                                </NavLink>
+                            </li>
+                            <li className={`nav-item ${location.pathname === '/receipts' ? 'active' : ''}`}>
+                                <NavLink to="/receipts" className="nav-link">
+                                    Show Receipts
+                                </NavLink>
+                            </li>
+                            </>
+                        ):""}
                     </ul>
                 </nav>
             </header>
