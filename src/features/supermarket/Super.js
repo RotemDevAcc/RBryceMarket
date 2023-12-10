@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { addProduct } from './cartSlice'
-import { selectproducts, purchaseCart, selectstatus, getDataAsync, selectcategories } from './superSlice';
+import { selectproducts, selectstatus, getDataAsync, selectcategories } from './superSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import Cart from './Cart';
 import { TargetServer } from '../settings/Settings';

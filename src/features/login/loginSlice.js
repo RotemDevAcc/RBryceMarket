@@ -11,17 +11,6 @@ const initialState = {
   loggedin:getUserDetailsFromSessionStorage() ? true : false,
   token:sessionStorage.getItem('token') || null,
   userDetails:getUserDetailsFromSessionStorage() || []
-  // userID: null,
-  // userName:null,
-  // firstname:"John",
-  // lastname:"Doe",
-  // email:"johndoe@gmail.com",
-  // gender:"male",
-  // dob:null,
-  // img:"placeholder.png",
-  // token:null,
-  // loggedin:false,
-  // is_staff:false
 };
 
 
@@ -88,5 +77,6 @@ export const { user_logout } = loginSlice.actions;
 export const is_user_logged = (state) => state.login.loggedin;
 export const is_user_staff = (state) => state.login.userDetails.is_staff;
 export const get_user_details = (state) => state.login.userDetails;
+export const get_user_token = (state) => state.login.token;
 
 export default loginSlice.reducer;

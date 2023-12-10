@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchProducts } from './superAPI';
+import { buyCart } from './superAPI';
 
 
 const initialState = {
@@ -13,7 +14,7 @@ export const getDataAsync = createAsyncThunk(
       const response = await fetchProducts();
       return response.data;
     }
-  );
+);
 
 
 
@@ -23,8 +24,16 @@ export const superSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     purchaseCart:(state,payload)=>{
-        const cart = payload.payload.cart
-        console.table(cart)
+      const pl = payload.payload
+      const cart = pl.cart
+      const token = pl.token
+      const price = pl.price
+      const data = {
+        "cart":cart,
+        "token":token,
+        "price":price
+      }
+      buyCart(data)
     },
 
 

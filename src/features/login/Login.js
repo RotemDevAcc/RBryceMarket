@@ -39,13 +39,9 @@ const Login = () => {
               <input type="password" onChange={(e) => setpassword(e.target.value)} className="form-control" id="password" name="password" required />
             </div>
             <button type="submit" onClick={() => login_user()} className="btn btn-primary btn-block">Login</button>
-            {/* <p className="mt-3 text-center">Forgot Your Password? <a onClick="forgot()"
-              style={{ cursor: "pointer", color: "rgb(0, 174, 255)" }}>Reset Password</a></p> */}
             <p className="mt-3 text-center">
               Don't have an account? <Link to="/register">Create New Account</Link>
             </p>
-
-            <div id="messagebox" className="text-center mt-3"></div>
           </div>
         </div>
       ) : navigate("/")}

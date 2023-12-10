@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { TargetServer } from '../settings/Settings';
+import { Message } from '../../Message';
 export async function logtoServer(details) {
     const MY_SERVER = `${TargetServer}login/`; // Updated protocol to 'http' or 'https'
     
@@ -17,6 +18,7 @@ export async function logtoServer(details) {
     })
     .catch(error => {
         console.error('Error while sending data to the server:', error);
+        Message(error.response.data.detail,"error")
         throw error;
     });
 }

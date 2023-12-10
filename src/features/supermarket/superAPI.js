@@ -1,6 +1,40 @@
 import axios from 'axios'
 import { TargetServer } from '../settings/Settings';
+import { Message } from '../../Message';
 export function fetchProducts() {
-    const MY_SERVER = `${TargetServer}productslist/`
-    return axios.get(MY_SERVER)
+    return axios.get(`${TargetServer}productslist/`)
+}
+
+export const buyCart = async (data)=> {
+    
+
+    try {
+        const response = await axios.post(`${TargetServer}productslist/`, data, {
+            headers: {
+                "Authorization": `Bearer ${data.token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+        return response;
+    } catch (error) {
+        console.error('Error while sending data to the server:', error);
+        Message(error.response.data.detail, "error");
+        throw error;
+    }
+
+    // const response = await fetch(MY_SERVER + "/productslist/", {
+    //     method: "POST",
+    //     headers: {
+    //         "Authorization": `Bearer ${myToken}`,
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ "cart": cart, "price": totalPrice })
+    // })
+    // const result = await response.json();
+    // if (result.state == "success") {
+    //     Message(result.msg, "success")
+    //     clearCart()
+    // } else {
+    //     Message(result.msg, "error")
+    // }
 }
