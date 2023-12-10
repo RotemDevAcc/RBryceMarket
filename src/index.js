@@ -15,6 +15,7 @@ import Layout from './Layout';
 import Contact from './Contact';
 import { ToastContainer } from 'react-toastify';
 import Profile from './Profile';
+import Register from './features/login/Register';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -33,6 +34,7 @@ root.render(
             <Route index element={<App />} />
             <Route path="super" element={<Super />} />
             <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
             <Route path="contact" element={<Contact />} />
             <Route path="profile" element={<Profile />} />
           </Route>

@@ -3,8 +3,9 @@ import { addProduct } from './cartSlice'
 import { selectproducts, purchaseCart, selectstatus, getDataAsync, selectcategories } from './superSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import Cart from './Cart';
+import { TargetServer } from '../settings/Settings';
 const Super = () => {
-    const MY_SERVER = 'http://127.0.0.1:8000/'
+    const MY_SERVER = TargetServer
     const superproducts = useSelector(selectproducts)
     const [mappedProducts, setMappedProducts] = useState([]);
     const [mappedCategories, setMappedCategories] = useState([]);
@@ -26,7 +27,7 @@ const Super = () => {
                 <div key={index} className="card mb-3" style={{ maxWidth: 540 }}>
                     <div className="row g-0">
                         <div className="col-md-4">
-                            <img src={MY_SERVER + prod.img} alt="" className="img-fluid" style={{ width: 100, height: 100 }} />
+                            <img src={`${MY_SERVER}static${prod.img}`} alt="" className="img-fluid" style={{ width: 100, height: 100 }} />
                         </div>
                         <div className="col-md-8">
                             <div className="card-body">
@@ -51,7 +52,7 @@ const Super = () => {
             setMappedProducts([]);
             setMappedCategories([]);
         }
-    }, [status, superproducts, supercategories, dispatch]);
+    }, [MY_SERVER,status, superproducts, supercategories, dispatch]);
 
     useEffect(() => {
         if (status === 'done') {
@@ -64,7 +65,7 @@ const Super = () => {
                     <div key={index} className="card mb-3" style={{ maxWidth: 540 }}>
                         <div className="row g-0">
                             <div className="col-md-4">
-                                <img src={MY_SERVER + prod.img} alt="" className="img-fluid" style={{ width: 100, height: 100 }} />
+                                <img src={`${MY_SERVER}static${prod.img}`} alt="" className="img-fluid" style={{ width: 100, height: 100 }} />
                             </div>
                             <div className="col-md-8">
                                 <div className="card-body">
@@ -82,7 +83,7 @@ const Super = () => {
 
             setFilteredProducts(productsList);
         }
-    }, [supercategories, searchQuery, status, superproducts, dispatch]);
+    }, [MY_SERVER,supercategories, searchQuery, status, superproducts, dispatch]);
 
     useEffect(() => {
         if (status === 'done') {
@@ -93,7 +94,7 @@ const Super = () => {
 
                         <div className="row g-0">
                             <div className="col-md-4">
-                                <img src={MY_SERVER + prod.img} alt="" className="img-fluid" style={{ width: 100, height: 100 }} />
+                                <img src={`${MY_SERVER}static${prod.img}`} alt="" className="img-fluid" style={{ width: 100, height: 100 }} />
                             </div>
                             <div className="col-md-8">
                                 <div className="card-body">
@@ -123,7 +124,7 @@ const Super = () => {
             setMappedProducts([]);
             setMappedCategories([]);
         }
-    }, [status, superproducts, supercategories, selectedCategoryId, dispatch]);
+    }, [MY_SERVER,status, superproducts, supercategories, selectedCategoryId, dispatch]);
 
     const handleCategoryClick = (categoryId) => {
         setSelectedCategoryId(categoryId);
@@ -152,8 +153,8 @@ const Super = () => {
                         </div>
                     </div>
                     <div className="col-md-4">
-                        <div class="input-group mb-3">
-                            <input type="text" placeholder="Search products..." class="form-control" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+                        <div className="input-group mb-3">
+                            <input type="text" placeholder="Search products..." className="form-control" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
                         </div>
                         <Cart />
                     </div>
